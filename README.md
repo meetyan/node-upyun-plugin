@@ -14,6 +14,8 @@ npm install -D node-upyun-plugin
 
 ## 使用方法：
 
+在项目根目录新建 `upyun.js` 文件，并按照如下信息填入：
+
 ```js
 const UpyunService = require('node-upyun-plugin');
 
@@ -26,6 +28,19 @@ const us = new UpyunService({
 });
 
 us.upload(); // 上传
+```
+
+如果想如效果演示般在命令行运行，可于 `package.json` 中添加一条命令：
+
+```js
+// package.json
+...
+
+  "scripts": {
+    "upyun": "node example/index.js"
+  }
+
+...
 ```
 
 ## API 调用
