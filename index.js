@@ -1,7 +1,7 @@
 const upyun = require('upyun');
 const fs = require('fs');
-const log = require('./util/log');
 const glob = require('glob');
+const log = require('./util/log');
 
 class UpyunService {
   constructor(options) {
@@ -13,14 +13,16 @@ class UpyunService {
       folderPath,
       files: []
     };
+
+    this._init();
   }
 
   // 初始化
-  async init() {
+  async _init() {
     const { name, operator, password } = this.state;
 
     // 检查必要参数是否传入
-    const isParamValid = this.checkParams({ name, operator, password });
+    const isParamValid = this._checkParams({ name, operator, password });
     if (!isParamValid) return;
 
     this.service = new upyun.Service(name, operator, password);
@@ -28,7 +30,7 @@ class UpyunService {
   }
 
   // 检查参数
-  checkParams(fields) {
+  _checkParams(fields) {
     for (let key in fields) {
       const field = fields[key];
 
@@ -42,7 +44,7 @@ class UpyunService {
   }
 
   // 读取文件
-  readFolder() {
+  _readFolder() {
     const folderPath = this.state.folderPath;
     const pattern = folderPath + '/**/*';
 
@@ -64,24 +66,8 @@ class UpyunService {
     this.state.files = fileList;
   }
 
-  // 上传所有文件
-  async upload() {
-    this.readFolder();
-    const { files } = this.state;
-
-    for (let file of files) {
-      // 检查是否文件夹，防止报错
-      const isDirectory = fs.lstatSync(file.path).isDirectory();
-      if (!isDirectory) {
-        await this.uploadFile(file);
-      }
-    }
-
-    log.success('所有文件均上传成功');
-  }
-
   // 上传单个文件
-  async uploadFile(file) {
+  async _uploadFile(file) {
     const localFile = fs.readFileSync(file.path);
     log.warn(`${file.path}，请稍候...`, '正在上传');
 
@@ -95,8 +81,24 @@ class UpyunService {
   }
 
   // 列出目录下所有文件
-  listDir() {
+  _listDir() {
     this.client.listDir('/').then(res => console.log(res));
+  }
+
+  // 上传所有文件
+  async upload() {
+    this._readFolder();
+    const { files } = this.state;
+
+    for (let file of files) {
+      // 检查是否文件夹，防止报错
+      const isDirectory = fs.lstatSync(file.path).isDirectory();
+      if (!isDirectory) {
+        await this._uploadFile(file);
+      }
+    }
+
+    log.success('所有文件均上传成功');
   }
 
   // 删除单个文件
