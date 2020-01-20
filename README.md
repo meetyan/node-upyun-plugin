@@ -62,7 +62,7 @@ us.upload(); // 上传
 
 ```js
 const options = { removeAll: false };
-us.upload(options); // 上传
+us.upload(options);
 ```
 
 ### 2. removeAll()
@@ -87,7 +87,7 @@ us.removeFile('static/media/icon-unliked.04c36067.svg');
 #### 示例
 
 ```js
-us.listDir('static')
+us.listDir('static');
 ```
 
 ## 支持
