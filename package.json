@@ -1,6 +1,6 @@
 {
   "name": "node-upyun-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "UPYUN uploader written in Node",
   "main": "index.js",
   "scripts": {
