@@ -16,7 +16,7 @@ npm install -D node-upyun-plugin
 
 ## 使用方法：
 
-在项目根目录新建 `upyun.js` 文件，并按照如下信息填入：
+在项目根目录新建 `upyun.js` （[示例](https://github.com/realfrancisyan/node-upyun-plugin/blob/master/upyun.example.js)）文件，并按照如下信息填入：
 
 ```js
 const UpyunService = require('node-upyun-plugin');
