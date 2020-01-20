@@ -49,7 +49,7 @@ us.upload(); // 上传
 
 ## API 调用
 
-### upload(options)
+### 1. upload(options)
 
 上传文件
 
@@ -65,11 +65,11 @@ const options = { removeAll: false };
 us.upload(options); // 上传
 ```
 
-### removeAll()
+### 2. removeAll()
 
 删除目录所有文件
 
-### removeFile
+### 3. removeFile
 
 删除某个文件
 
@@ -79,7 +79,7 @@ us.upload(options); // 上传
 us.removeFile('static/media/icon-unliked.04c36067.svg');
 ```
 
-### listDir(remotePath = '/')
+### 4. listDir(remotePath = '/')
 
 展示某个文件夹的所有文件
 
