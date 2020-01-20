@@ -11,7 +11,8 @@ class UpyunService {
       operator,
       password,
       folderPath,
-      files: []
+      files: [], // 本地上传文件
+      remoteFiles: [] // 存储在又拍云的目录文件
     };
 
     this._init();
@@ -19,10 +20,15 @@ class UpyunService {
 
   // 初始化
   async _init() {
-    const { name, operator, password } = this.state;
+    const { name, operator, password, folderPath } = this.state;
 
     // 检查必要参数是否传入
-    const isParamValid = this._checkParams({ name, operator, password });
+    const isParamValid = this._checkParams({
+      name,
+      operator,
+      password,
+      folderPath
+    });
     if (!isParamValid) return;
 
     this.service = new upyun.Service(name, operator, password);
@@ -81,12 +87,42 @@ class UpyunService {
   }
 
   // 列出目录下所有文件
-  _listDir() {
-    this.client.listDir('/').then(res => console.log(res));
+  async listDir(remotePath = '/') {
+    const options = { limit: 10000 };
+    const fileList = await this.client.listDir(remotePath, options);
+    if (!fileList) log.error('读取文件夹失败！请检查目录是否存在');
+
+    for (let file of fileList.files) {
+      const path =
+        remotePath === '/' ? file.name : `${remotePath}/${file.name}`;
+
+      if (file.type !== 'F') {
+        file.remotePath = path;
+        this.state.remoteFiles.push(file);
+      } else {
+        await this.listDir(path); // 如果是文件夹，递归遍历
+      }
+    }
+  }
+
+  // 删除单个文件
+  async removeFile(path = '') {
+    // 遍历所有文件，删除，或删除指定
+    log.prompt(`正在删除文件 ${path}...`);
+    const isSuccess = await this.client.deleteFile(path);
+    if (isSuccess) {
+      log.success('删除成功');
+    } else {
+      log.error('删除失败');
+    }
   }
 
   // 上传所有文件
-  async upload() {
+  async upload(options = {}) {
+    // 上传前，是否先删除所有文件
+    const { removeAll = false } = options;
+    if (removeAll) await this.removeAll();
+
     this._readFolder();
     const { files } = this.state;
 
@@ -101,16 +137,17 @@ class UpyunService {
     log.success('所有文件均上传成功');
   }
 
-  // 删除单个文件
-  async removeFile(path = '') {
-    // 遍历所有文件，删除，或删除指定
-    log.prompt(`正在删除文件 ${path}...`);
-    const isSuccess = await this.client.deleteFile(path);
-    if (isSuccess) {
-      log.success('删除成功');
-    } else {
-      log.error('删除失败');
+  // 删除目录下所有文件
+  async removeAll() {
+    await this.listDir();
+
+    const { remoteFiles } = this.state;
+
+    for (let file of remoteFiles) {
+      await this.removeFile(file.remotePath);
     }
+
+    log.success('删除所有文件成功');
   }
 }
 
