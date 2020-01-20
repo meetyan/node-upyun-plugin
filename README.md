@@ -2,6 +2,8 @@
 
 又拍云云存储 Node.js 文件上传工具
 
+[![npm version](https://badge.fury.io/js/node-upyun-plugin.svg)](https://badge.fury.io/js/node-upyun-plugin)
+
 ## 效果演示
 
 ![https://i.imgur.com/7B64sRo.gif](https://i.imgur.com/7B64sRo.gif)
