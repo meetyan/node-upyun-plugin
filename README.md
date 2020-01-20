@@ -4,7 +4,7 @@
 
 ## 效果演示
 
-!()[https://i.imgur.com/7B64sRo.gif]
+![https://i.imgur.com/7B64sRo.gif](https://i.imgur.com/7B64sRo.gif)
 
 ## 安装
 
