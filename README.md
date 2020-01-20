@@ -39,7 +39,9 @@ us.upload(); // 上传
 ...
 
   "scripts": {
+    ...
     "upyun": "node upyun.js"
+    ...
   }
 
 ...
@@ -56,6 +58,8 @@ us.upload(); // 上传
 - `options`:
   - `removeAll`: 是否上传前，先删除所有文件，默认 `false`
 
+#### 示例
+
 ```js
 const options = { removeAll: false };
 us.upload(options); // 上传
@@ -69,6 +73,8 @@ us.upload(options); // 上传
 
 删除某个文件
 
+#### 示例
+
 ```js
 us.removeFile('static/media/icon-unliked.04c36067.svg');
 ```
@@ -76,6 +82,13 @@ us.removeFile('static/media/icon-unliked.04c36067.svg');
 ### listDir(remotePath = '/')
 
 展示某个文件夹的所有文件
+
+
+#### 示例
+
+```js
+us.listDir('static')
+```
 
 ## 支持
 
