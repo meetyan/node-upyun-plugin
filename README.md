@@ -23,3 +23,35 @@ const us = new UpyunService({
 
 us.upload(); // 上传
 ```
+
+## API 调用
+
+### upload(options)
+
+上传文件
+
+#### 参数
+
+- `options`:
+  - `removeAll`: 是否上传前，先删除所有文件，默认 `false`
+
+```js
+const options = { removeAll: false };
+us.upload(options); // 上传
+```
+
+### removeAll()
+
+删除目录所有文件
+
+### removeFile
+
+删除某个文件
+
+```js
+us.removeFile('static/media/icon-unliked.04c36067.svg');
+```
+
+### listDir(remotePath = '/')
+
+展示某个文件夹的所有文件
