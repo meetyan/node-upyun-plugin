@@ -49,6 +49,15 @@ class UpyunService {
     return true;
   }
 
+  _validateServer() {
+    if (!this.service || !this.client) {
+      if (!this.service) log.error('找不到 service，请确保服务参数已正确传入');
+      if (!this.client) log.error('找不到 client，请确保服务参数已正确传入');
+      return false;
+    }
+    return true;
+  }
+
   // 读取文件
   _readFolder() {
     const folderPath = this.state.folderPath;
@@ -88,6 +97,8 @@ class UpyunService {
 
   // 列出目录下所有文件
   async listDir(remotePath = '/') {
+    if (!this._validateServer()) return;
+
     const options = { limit: 10000 };
     const fileList = await this.client.listDir(remotePath, options);
     if (!fileList) log.error('读取文件夹失败！请检查目录是否存在');
@@ -107,6 +118,8 @@ class UpyunService {
 
   // 删除单个文件
   async removeFile(path = '') {
+    if (!this._validateServer()) return;
+
     // 遍历所有文件，删除，或删除指定
     log.prompt(`正在删除文件 ${path}...`);
     const isSuccess = await this.client.deleteFile(path);
@@ -119,6 +132,8 @@ class UpyunService {
 
   // 上传所有文件
   async upload(options = {}) {
+    if (!this._validateServer()) return;
+
     // 上传前，是否先删除所有文件
     const { removeAll = false } = options;
     if (removeAll) await this.removeAll();
@@ -134,11 +149,13 @@ class UpyunService {
       }
     }
 
-    log.success('所有文件均上传成功');
+    if (files.length) log.success('所有文件均上传成功');
   }
 
   // 删除目录下所有文件
   async removeAll() {
+    if (!this._validateServer()) return;
+
     await this.listDir();
 
     const { remoteFiles } = this.state;
