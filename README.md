@@ -2,6 +2,10 @@
 
 又拍云云存储 Node.js 文件上传工具
 
+## 效果演示
+
+!()[https://i.imgur.com/7B64sRo.gif]
+
 ## 安装
 
 ```terminal
@@ -55,3 +59,9 @@ us.removeFile('static/media/icon-unliked.04c36067.svg');
 ### listDir(remotePath = '/')
 
 展示某个文件夹的所有文件
+
+## 支持
+
+若本插件对您有帮助，欢迎 star 和 fork。
+
+如果在使用过程中发现有问题或疑问，欢迎提交 [issue](https://github.com/realfrancisyan/node-upyun-plugin/issues)。
