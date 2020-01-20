@@ -10,6 +10,8 @@ npm install -D node-upyun-plugin
 
 ## 使用方法：
 
+注意：在调用上传方法前，必须调用 `init()` 初始化又拍云，否则报错
+
 ```js
 const UpyunService = require('node-upyun-plugin');
 
