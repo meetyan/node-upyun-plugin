@@ -1,0 +1,31 @@
+{
+  "name": "node-upyun-plugin",
+  "version": "1.0.0",
+  "description": "UPYUN uploader written in Node",
+  "main": "index.js",
+  "scripts": {
+    "upyun": "node example/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/realfrancisyan/node-upyun-plugin.git"
+  },
+  "keywords": [
+    "upyun",
+    "upyun-sdk",
+    "upyun-uploader",
+    "node-upyun"
+  ],
+  "author": "Jiajun Yan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/realfrancisyan/node-upyun-plugin/issues"
+  },
+  "homepage": "https://github.com/realfrancisyan/node-upyun-plugin#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "glob": "^7.1.6",
+    "upyun": "^3.3.12"
+  }
+}
