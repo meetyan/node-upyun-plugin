@@ -37,7 +37,7 @@ us.upload(); // 上传
 ...
 
   "scripts": {
-    "upyun": "node example/index.js"
+    "upyun": "node upyun.js"
   }
 
 ...
