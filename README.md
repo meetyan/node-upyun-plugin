@@ -70,7 +70,7 @@ us.upload(options);
 
 删除目录所有文件
 
-### 3. removeFile
+### 3. removeFile(path)
 
 删除某个文件
 
