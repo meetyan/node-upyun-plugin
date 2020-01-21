@@ -50,11 +50,15 @@ class UpyunService {
   }
 
   _validateService() {
-    if (!this.service || !this.client) {
-      if (!this.service) log.error('找不到 service，请确保服务参数已正确传入');
-      if (!this.client) log.error('找不到 client，请确保服务参数已正确传入');
+    if (!this.service) {
+      log.error('找不到 service，请确保服务参数已正确传入');
       return false;
     }
+    if (!this.client) {
+      log.error('找不到 client，请确保服务参数已正确传入');
+      return false;
+    }
+
     return true;
   }
 
