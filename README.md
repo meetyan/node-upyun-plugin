@@ -4,6 +4,8 @@
 
 ![npm version](https://img.shields.io/npm/v/node-upyun-plugin)
 ![](https://img.shields.io/npm/l/node-upyun-plugin)
+![](https://img.shields.io/maintenance/yes/2030)
+![](https://img.shields.io/github/languages/code-size/realfrancisyan/node-upyun-plugin)
 
 ## 效果演示
 
