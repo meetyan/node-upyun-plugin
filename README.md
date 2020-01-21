@@ -56,7 +56,7 @@ us.upload(); // 上传
 
 #### 参数
 
-- `options`:
+- `options`: （可选）
   - `removeAll`: 是否上传前，先删除所有文件，默认 `false`
   - `localPath`: 指定上传目录，默认为 `folderPath`
   - `remotePath`: 指定上传到又拍云的目录，默认为根目录
