@@ -98,10 +98,10 @@ class UpyunService {
   }
 
   // 列出目录下所有文件
-  async listDir(remotePath = '/') {
+  async listDir(remotePath = '/', limit = 10000) {
     if (!this._validateService()) return;
 
-    const options = { limit: 10000 };
+    const options = { limit };
     const fileList = await this.client.listDir(remotePath, options);
     if (!fileList) log.error('读取文件夹失败！请检查目录是否存在');
 

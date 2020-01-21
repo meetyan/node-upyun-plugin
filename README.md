@@ -88,14 +88,14 @@ us.upload(options);
 us.removeFile('static/media/icon-unliked.04c36067.svg');
 ```
 
-### 4. listDir(remotePath = '/')
+### 4. listDir(remotePath = '/', limit)
 
 展示某个文件夹的所有文件
 
 #### 示例
 
 ```js
-us.listDir('static');
+us.listDir('static', 200);
 ```
 
 ## 支持
