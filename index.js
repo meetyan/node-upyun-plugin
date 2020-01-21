@@ -63,16 +63,12 @@ class UpyunService {
   }
 
   // 读取文件
-  _readFolder() {
-    const folderPath = this.state.folderPath;
+  _readFolder(folderPath = this.state.folderPath) {
     const pattern = folderPath + '/**/*';
 
     const fileList = glob.sync(pattern).map(path => {
       const name = path.replace(folderPath, '');
-      const result = {
-        name,
-        path
-      };
+      const result = { name, path };
 
       return result;
     });
@@ -86,15 +82,17 @@ class UpyunService {
   }
 
   // 上传单个文件
-  async _uploadFile(file) {
+  async _uploadFile(file, remotePath) {
     const localFile = fs.readFileSync(file.path);
     log.warn(`${file.path}，请稍候...`, '正在上传');
 
     const onSuccess = () => log.success('上传成功');
     const onError = () => log.error('上传失败');
 
+    remotePath = remotePath ? `${remotePath}/${file.name}` : file.name;
+
     await this.client
-      .putFile(file.name, localFile)
+      .putFile(remotePath, localFile)
       .then(onSuccess)
       .catch(onError);
   }
@@ -121,8 +119,9 @@ class UpyunService {
   }
 
   // 删除单个文件
-  async removeFile(path = '') {
+  async removeFile(path) {
     if (!this._validateService()) return;
+    if (!path) return;
 
     // 遍历所有文件，删除，或删除指定
     log.prompt(`正在删除文件 ${path}...`);
@@ -139,17 +138,17 @@ class UpyunService {
     if (!this._validateService()) return;
 
     // 上传前，是否先删除所有文件
-    const { removeAll = false } = options;
+    const { removeAll = false, localPath, remotePath } = options;
     if (removeAll) await this.removeAll();
 
-    this._readFolder();
+    this._readFolder(localPath);
     const { files } = this.state;
 
     for (let file of files) {
       // 检查是否文件夹，防止报错
       const isDirectory = fs.lstatSync(file.path).isDirectory();
       if (!isDirectory) {
-        await this._uploadFile(file);
+        await this._uploadFile(file, remotePath);
       }
     }
 

@@ -58,11 +58,17 @@ us.upload(); // 上传
 
 - `options`:
   - `removeAll`: 是否上传前，先删除所有文件，默认 `false`
+  - `localPath`: 指定上传目录，默认为 `folderPath`
+  - `remotePath`: 指定上传到又拍云的目录，默认为根目录
 
 #### 示例
 
 ```js
-const options = { removeAll: false };
+const options = {
+  removeAll: false,
+  localPath: 'build/static',
+  remotePath: 'path/to/example'
+};
 us.upload(options);
 ```
 
@@ -83,7 +89,6 @@ us.removeFile('static/media/icon-unliked.04c36067.svg');
 ### 4. listDir(remotePath = '/')
 
 展示某个文件夹的所有文件
-
 
 #### 示例
 
