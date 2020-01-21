@@ -137,9 +137,9 @@ class UpyunService {
   async upload(options = {}) {
     if (!this._validateService()) return;
 
-    // 上传前，是否先删除所有文件
     const { removeAll = false, localPath, remotePath } = options;
-    if (removeAll) await this.removeAll();
+
+    if (removeAll) await this.removeAll(); // 上传前，是否先删除所有文件
 
     this._readFolder(localPath);
     const { files } = this.state;
