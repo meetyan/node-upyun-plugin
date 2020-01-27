@@ -121,7 +121,10 @@ class UpyunService {
   // 删除单个文件
   async removeFile(path) {
     if (!this._validateService()) return;
-    if (!path) return;
+    if (!path) {
+      log.error('找不到路径！请提供正确路径');
+      return;
+    }
 
     // 遍历所有文件，删除，或删除指定
     log.prompt(`正在删除文件 ${path}...`);
