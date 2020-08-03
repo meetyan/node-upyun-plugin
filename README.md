@@ -103,3 +103,5 @@ us.listDir('static', 200);
 若本插件对您有帮助，欢迎 star 和 fork。
 
 如果在使用过程中发现有问题或疑问，欢迎提交 [issue](https://github.com/realfrancisyan/node-upyun-plugin/issues)。
+
+## pr
